@@ -51,5 +51,10 @@ public class CalculatorTest {
 	boolean hasOver = Calculator.hasOverThousand("1001,2");
 	assertEquals(ifOver, hasOver);
 	}
+
+	@Test
+	public void testRemoverThousand(){
+	assertEquals(25, Calculator.add("1123,20,5"));
+	}
 }
 

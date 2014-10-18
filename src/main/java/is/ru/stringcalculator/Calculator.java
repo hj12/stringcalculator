@@ -15,6 +15,12 @@ public class Calculator {
     			System.out.println(e.toString());
     		}
 
+		if(hasOverThousand(text))
+        	{
+        		text = removeThousands(text);
+        		return sum(splitNumbers(text));
+        	}
+
 		if(text.equals("")){
 			return 0;
 		}
@@ -63,6 +69,55 @@ public class Calculator {
 	return false;
 }
 
+	public static String removeThousands(String text)
+{
+	int counter = 0;
+	String newText = "";
+	String tmp = "";
+	for(int i = 0; i < text.length();i++)
+	{
+		if(i >= text.length())
+		{
+			break;
+		}
+	char c = text.charAt(i);
+	while(Character.isDigit(c))
+		{
+			counter++;
+			tmp = tmp + c;
+			i++;
+			if(i >= text.length())
+			{
+				break;
+			}
+			c = text.charAt(i);
+		}
+
+		if(counter < 4)
+		{
+			newText = newText + tmp;
+		}
+		
+		String s = Character.toString(c);
+		if(!Character.isDigit(c))
+		{
+			newText = newText + s;
+		}
+		tmp = "";
+		counter = 0;
+	
+
+	}
+	char c = newText.charAt(0);
+	boolean firstLetter = Character.isDigit(c);
+	if(firstLetter == false)
+	{
+		newText = newText.substring(1);
+	}
+	
+	return newText;
+}
+	
 	private static int toInt(String number){
 		return Integer.parseInt(number);
 	}
