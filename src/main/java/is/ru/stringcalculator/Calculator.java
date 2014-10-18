@@ -41,6 +41,28 @@ public class Calculator {
 			return 1;
 	}
 
+	public static boolean hasOverThousand(String text){
+	int counter = 0;
+	for(int i = 0; i < text.length(); i++)
+	{
+		char c = text.charAt(i);
+		if(Character.isDigit(c))
+		{
+			counter++;
+		}
+		else
+		{
+			counter = 0;
+		}
+		if(counter >= 4)
+		{
+			return true;
+		}
+	}
+	
+	return false;
+}
+
 	private static int toInt(String number){
 		return Integer.parseInt(number);
 	}

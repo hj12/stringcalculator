@@ -45,5 +45,11 @@ public class CalculatorTest {
         Calculator.add("-1, 2, -3");
 	}
 
+	@Test
+	public void testLargerThenThousand(){
+	boolean  ifOver = true;
+	boolean hasOver = Calculator.hasOverThousand("1001,2");
+	assertEquals(ifOver, hasOver);
+	}
 }
 
