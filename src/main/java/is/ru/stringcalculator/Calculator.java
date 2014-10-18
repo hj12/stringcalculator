@@ -3,8 +3,18 @@ package is.ru.stringcalculator;
 public class Calculator {
 
 	public static int add(String text){
-		
+
 		String criteria = "/" + "/";
+		try
+        	{
+        		checkForNegatives(text);
+        	}
+
+    		catch (IllegalArgumentException e)
+    		{
+    			System.out.println(e.toString());
+    		}
+
 		if(text.equals("")){
 			return 0;
 		}
@@ -12,15 +22,17 @@ public class Calculator {
 			return sum(splitNumbers(text));
 		}
 		else if(text.contains(criteria)){
-			String delimiter = text.valueOf(2);
+			char delimiter = text.charAt(2);
+	                String d = Character.toString(delimiter);
+			
 			String sub = text.substring(4);
 			for(int i = 0; i < sub.length(); i++)
 			{
 				char c = sub.charAt(i);
 				String c2 = Character.toString(c);
-				if(delimiter.equals(c2))
+				if(d.equals(c2))
 				{
-					sub = sub.replace(delimiter, ",");
+					sub = sub.replace(d, ",");
 				}
 			}
 			 return sum(splitNumbers(sub));
@@ -36,7 +48,7 @@ public class Calculator {
 	private static String[] splitNumbers(String numbers){
 	    return numbers.split(",|\\n");
 	}
-      
+
     private static int sum(String[] numbers){
  	    int total = 0;
         for(String number : numbers){
@@ -45,6 +57,28 @@ public class Calculator {
 		return total;
     }
 
+	private static boolean checkForNegatives(String text)
+{
+	if(text.contains("-"))
+	{
+		String outcome = "";
+		for(int i = 0; i < text.length(); i++)
+		{
+			char c = text.charAt(i);
+			String s = Character.toString(c);
+			if(s.equals("-"))
+			{
+				char c2 = text.charAt(i + 1);
+				String s2 = Character.toString(c2);
+				outcome = outcome + "-" + s2 + " ";
+			}
+		}
+		
+		throw new IllegalArgumentException("Negatives not allowed:" + outcome);
+		
+	}
 
+	return false;
+}
 
 }
